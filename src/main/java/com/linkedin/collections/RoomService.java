@@ -13,44 +13,44 @@ public class RoomService {
 	
 	public void applyDiscount(final double discount) {
 		//Reduces the rate of each room by the provided discount
-		Iterator<Room> iterator = inventory.iterator();
-		while (iterator.hasNext()) {
-			Room room = iterator.next();
-			room.setRate(room.getRate() - discount * room.getRate());
-		}
-//		this.inventory.forEach(room -> room.setRate(room.getRate() - discount * room.getRate()));
+//		Iterator<Room> iterator = inventory.iterator();
+//		while (iterator.hasNext()) {
+//			Room room = iterator.next();
+//			room.setRate(room.getRate() - discount * room.getRate());
+//		}
+		this.inventory.forEach(room -> room.setRate(room.getRate() - discount * room.getRate()));
 	}
 
 	public Collection<Room> getRoomsByCapacity(final int requiredCapacity) {
 		//Returns a new collection of rooms that meet or exceed the provided capacity
-		Collection<Room> result = new LinkedHashSet<>();
-		Iterator<Room> iterator = inventory.iterator();
-		while (iterator.hasNext()) {
-			Room room = iterator.next();
-			if (room.getCapacity() >= requiredCapacity) {
-				result.add(room);
-			}
-		}
-		return result;
-//		return inventory.stream()
-//				.filter(r -> r.getCapacity() >= requiredCapacity)
-//				.collect(Collectors.toList());
+//		Collection<Room> result = new LinkedHashSet<>();
+//		Iterator<Room> iterator = inventory.iterator();
+//		while (iterator.hasNext()) {
+//			Room room = iterator.next();
+//			if (room.getCapacity() >= requiredCapacity) {
+//				result.add(room);
+//			}
+//		}
+//		return result;
+		return inventory.stream()
+				.filter(r -> r.getCapacity() >= requiredCapacity)
+				.collect(Collectors.toList());
 	}
 	
 	public Collection<Room> getRoomByRateAndType(final double rate, final String type){
 		//Returns a new collection of rooms with a rate below the provided rate and that match the provided type
-		Collection<Room> result = new LinkedHashSet<>();
-		Iterator<Room> iterator = inventory.iterator();
-		while (iterator.hasNext()) {
-			Room room = iterator.next();
-			if (room.getRate() < rate && room.getType().equals(type)) {
-				result.add(room);
-			}
-		}
-		return result;
-//		return inventory.stream()
-//				.filter(room -> room.getRate() < rate && room.getType().equals(type))
-//				.collect(Collectors.toList());
+//		Collection<Room> result = new LinkedHashSet<>();
+//		Iterator<Room> iterator = inventory.iterator();
+//		while (iterator.hasNext()) {
+//			Room room = iterator.next();
+//			if (room.getRate() < rate && room.getType().equals(type)) {
+//				result.add(room);
+//			}
+//		}
+//		return result;
+		return inventory.stream()
+				.filter(room -> room.getRate() < rate && room.getType().equals(type))
+				.collect(Collectors.toList());
 	}
 	
 	public boolean hasRoom(Room room) {
